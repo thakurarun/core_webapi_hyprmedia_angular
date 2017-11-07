@@ -20,7 +20,7 @@ namespace SimpleAPI.Controllers.ProductArea
                                             .Select(product =>
                                                 CreateResourceDataOfProduct(product));
 
-            var response = new ResourceData<object>(products)
+            var response = new ResourceList<object>(products)
                 .AddLink(UrlCreator
                     .From<ProductController, object>("add", ctrl => ctrl.Post(null))
                     .WithParams<ProductModel>());
@@ -55,13 +55,16 @@ namespace SimpleAPI.Controllers.ProductArea
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var result = ProductProducer.Products
                                        .Single(product => product.Id == id);
-            ProductProducer
+            await Task.Run(async () => ProductProducer
                 .Products
-                .Remove(result);
+                .Remove(result)
+            );
+
+            return Ok(true);
         }
 
         private ResourceData<Product> CreateResourceDataOfProduct(Product product)

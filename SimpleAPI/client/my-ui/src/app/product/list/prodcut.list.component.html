@@ -1,0 +1,40 @@
+<p>
+    Product List
+</p>
+
+<div>
+    <ng-container *ngIf="products">
+        <table class="table table-dark table-hover">
+            <thead>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of products.items">
+                    <td>
+                        <span>{{item.data.name}}</span>
+                    </td>
+                    <td>
+                        <span>{{item.data.category}}</span>
+                    </td>
+                    <td>
+                        <span>{{item.data.price}}</span>
+                    </td>
+                    <td>
+                        <span>
+                            <button class="btn btn-primary" (click)="viewDetail(item)">Detail</button>
+                        </span>
+                        <span>
+                            <button class="btn btn-primary" (click)="onEdit(item)">Edit</button>
+                        </span>
+                        <span>
+                            <button class="btn btn-primary" (click)="onDelete(item)">Delete</button>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+</div>
