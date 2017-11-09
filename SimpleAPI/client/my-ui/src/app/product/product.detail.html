@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col col-8">
-        <app-product-list (onProductSelection)="onProductSelection($event)">
+        <app-product-list 
+        (onProductSelection)="onProductSelection($event)"
+        [editMode]="editMode">
         </app-product-list>
     </div>
 
@@ -8,6 +10,7 @@
         <app-edit-product 
         [product]="selectedProduct" 
         *ngIf="editMode"
+        (onSuccessSave)="saveProductChanges($event)"
         (onCancel)="onCancelEdit($event)">
         </app-edit-product>
     </div>

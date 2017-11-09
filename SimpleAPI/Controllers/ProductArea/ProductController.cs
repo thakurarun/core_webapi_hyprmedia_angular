@@ -25,32 +25,37 @@ namespace SimpleAPI.Controllers.ProductArea
                     .From<ProductController, object>("add", ctrl => ctrl.Post(null))
                     .WithParams<ProductModel>());
 
-            return Ok(response);
+            return await Task.Run(() => Ok(response));
         }
 
         // GET: api/Product/5
         [HttpGet("{id}")]
-        public async Task<Product> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return await Task.Run(() => ProductProducer.Products
+            var result = await Task.Run(() => ProductProducer.Products
                                   .First(product => id == product.Id));
+            return Ok(result);
         }
 
         // POST: api/Product
         [HttpPost]
-        public async Task Post([FromBody]Product newProduct)
+        public async Task<IActionResult> Post([FromBody]Product newProduct)
         {
             ProductProducer.Products
                            .Add(newProduct);
+            return await Task.Run(() => Ok(true));
         }
 
         // PUT: api/Product/5
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody]string name)
+        public async Task<IActionResult> Put(int id, [FromBody]Product product)
         {
             var result = ProductProducer.Products
-                                        .Single(product => product.Id == id);
-            result.Name = name;
+                                        .Single(_product => _product.Id == id);
+            result.Name = product.Name;
+            result.Category = product.Category;
+            result.Price = product.Price;
+            return await Task.Run(() => Ok(true));
         }
 
         // DELETE: api/ApiWithActions/5
@@ -59,7 +64,7 @@ namespace SimpleAPI.Controllers.ProductArea
         {
             var result = ProductProducer.Products
                                        .Single(product => product.Id == id);
-            await Task.Run(async () => ProductProducer
+            await Task.Run(() => ProductProducer
                 .Products
                 .Remove(result)
             );
@@ -76,9 +81,7 @@ namespace SimpleAPI.Controllers.ProductArea
                     .From<ProductController, object>("self", ctrl => ctrl.Get(product.Id)),
                 UrlCreator
                     .From<ProductController, object>("edit", ctrl => ctrl.Put(product.Id, null))
-                    .WithParams(new {
-                        name = string.Empty
-                    }),
+                   .WithParams<ProductModel>(),
                 UrlCreator
                     .From<ProductController, object>("delete", ctrl => ctrl.Delete(product.Id)),
 
