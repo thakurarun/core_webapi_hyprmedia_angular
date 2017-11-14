@@ -38,9 +38,20 @@ export class ProductListComponent implements OnInit {
             });
     }
 
-    viewDetail(product: IProductDTO) {
-        alert('Show Details');
+    createNewProduct() {
+        this.selectedProduct = {
+            data: {
+                id: null,
+                name: '',
+                category: 'Automatic',
+                price: 0.0
+            }, links: [
+                this.products.links.find(link => link.rel === 'add')
+            ]
+        };
+        this.onProductSelection.emit(this.selectedProduct);
     }
+
     onEdit(product: IProductDTO): void {
         this.selectedProduct = _.cloneDeep(product);
         this.onProductSelection.emit(this.selectedProduct);
@@ -49,8 +60,10 @@ export class ProductListComponent implements OnInit {
     onDelete(product: IProductDTO) {
         this.productService
             .deleteProduct(product)
-            .subscribe(() => {
-                this.loadProducts();
+            .subscribe(res => {
+                if (res) {
+                    this.loadProducts();
+                }
             });
     }
 }

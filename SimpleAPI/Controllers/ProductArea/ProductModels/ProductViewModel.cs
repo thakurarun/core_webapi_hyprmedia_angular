@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SimpleAPI.Controllers.ProductArea.ProductModels
 {
     public class Product
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
         public decimal Price { get; set; }
@@ -32,11 +33,11 @@ namespace SimpleAPI.Controllers.ProductArea.ProductModels
     {
         public static IList<Product> Products = new List<Product>
         {
-            new Product{ Id = 1, Name = "ABC", Price = 10.25M, Category = "Automatic" },
-            new Product{ Id = 2, Name = "EFG", Price = 20.00M, Category = "Automatic" },
-            new Product{ Id = 3, Name = "HKL", Price = 12.45M, Category = "Automatic" },
-            new Product{ Id = 4, Name = "MBP", Price = 56.00M, Category = "Automatic" },
-            new Product{ Id = 5, Name = "XYZ", Price = 15.30M, Category = "Automatic" }
+            new Product{ Id = Guid.NewGuid(), Name = "ABC", Price = 10.25M, Category = "Automatic" },
+            new Product{ Id = Guid.NewGuid(), Name = "EFG", Price = 20.00M, Category = "Automatic" },
+            new Product{ Id = Guid.NewGuid(), Name = "HKL", Price = 12.45M, Category = "Automatic" },
+            new Product{ Id = Guid.NewGuid(), Name = "MBP", Price = 56.00M, Category = "Automatic" },
+            new Product{ Id = Guid.NewGuid(), Name = "XYZ", Price = 15.30M, Category = "Automatic" }
         };
     }
 }

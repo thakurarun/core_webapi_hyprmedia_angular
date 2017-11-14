@@ -2,6 +2,7 @@
 using SimpleAPI.Controllers.ProductArea.ProductModels;
 using SimpleAPI.CustomUrlHelper;
 using SimpleAPI.Resource;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace SimpleAPI.Controllers.ProductArea
 
         // GET: api/Product/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(Guid id)
         {
             var result = await Task.Run(() => ProductProducer.Products
                                   .First(product => id == product.Id));
@@ -41,14 +42,19 @@ namespace SimpleAPI.Controllers.ProductArea
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]Product newProduct)
         {
-            ProductProducer.Products
+            if (newProduct.Id == Guid.Empty)
+            {
+                newProduct.Id = Guid.NewGuid();
+                ProductProducer.Products
                            .Add(newProduct);
-            return await Task.Run(() => Ok(true));
+                return await Task.Run(() => Ok(true));
+            }
+            return await Task.Run(() => Ok(false));
         }
 
         // PUT: api/Product/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody]Product product)
+        public async Task<IActionResult> Put(Guid id, [FromBody]Product product)
         {
             var result = ProductProducer.Products
                                         .Single(_product => _product.Id == id);
@@ -60,7 +66,7 @@ namespace SimpleAPI.Controllers.ProductArea
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var result = ProductProducer.Products
                                        .Single(product => product.Id == id);

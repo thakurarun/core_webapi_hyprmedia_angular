@@ -18,11 +18,14 @@ export class EditProductComponent implements OnInit {
     @Output()
     onSuccessSave: EventEmitter<boolean> = new EventEmitter();
 
+    editMode = false;
     categories: string[] = ['Automatic', 'Manual'];
 
     constructor(private productService: ProductService) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.editMode = !this.product.links.some(link => link.rel === 'add');
+    }
 
     cancelEdit() {
         this.onCancel.emit(false);
@@ -33,10 +36,10 @@ export class EditProductComponent implements OnInit {
             .saveProduct(this.product)
             .subscribe(response => {
                 if (response) {
-                    // reload product list
                     this.onSuccessSave.emit(true);
+                } else {
+                    alert('fail to save');
                 }
             });
-        // this.onSaveProduct.emit(this.product);
     }
 }
