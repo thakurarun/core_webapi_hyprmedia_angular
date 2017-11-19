@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, HostListener, EventEmitter } from '@a
 import * as _ from 'lodash';
 import { ProductService } from '../product.service';
 import { IProductList, IProductDTO } from '../productModel';
+import { debounce } from 'rxjs/operators/debounce';
 @Component({
     selector: 'app-product-list',
     templateUrl: 'prodcut.list.html'
@@ -15,7 +16,7 @@ export class ProductListComponent implements OnInit {
     @Input()
     editMode = false;
     @Output()
-    onProductSelection: EventEmitter<IProductDTO> = new EventEmitter<IProductDTO>();
+    onProductSelection: EventEmitter<IProductDTO>;
 
     onProductUpdate(product: IProductDTO) {
         const _product = this.products.items.find(item => item.data.id === product.data.id);
@@ -24,7 +25,9 @@ export class ProductListComponent implements OnInit {
     }
 
 
-    constructor(private productService: ProductService) { }
+    constructor(private productService: ProductService) {
+        this.onProductSelection = new EventEmitter<IProductDTO>();
+    }
 
     ngOnInit() {
         this.loadProducts();

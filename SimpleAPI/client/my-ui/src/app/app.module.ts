@@ -12,6 +12,9 @@ import { ProductListComponent } from './product/list/product.list.component';
 import { EditProductComponent } from './product/edit/edit.product.component';
 import { ProductService } from './product/product.service';
 import { AppHttpClientInterceptor } from './shared/AppHttpClientInterceptor';
+import { MyAccountModule } from './myAccount/myAccountModule';
+import { RoutingModule } from './app.route.module';
+import { UserAccountsModule } from './userAccounts/user.account.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,9 +24,12 @@ import { AppHttpClientInterceptor } from './shared/AppHttpClientInterceptor';
   ],
   imports: [
     BrowserModule,
+    RoutingModule,
     FormsModule,
     ReactiveFormsModule,
     AppSharedModule,
+    MyAccountModule,
+    UserAccountsModule,
     HttpClientModule
   ],
   providers: [

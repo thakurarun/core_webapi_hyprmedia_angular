@@ -1,10 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-</div>
+<ul class="nav nav-pills nav-fill justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/myaccount" routerLinkActive="active">My Account</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" routerLink="/accounts" routerLinkActive="active">Manage Accounts</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" routerLinkActive="active">About Us</a>
+  </li>
+</ul>
+<hr>
 <div class="container">
   <app-progress-loader></app-progress-loader>
-  <app-product-detail></app-product-detail>
+  <router-outlet></router-outlet>
 </div>
