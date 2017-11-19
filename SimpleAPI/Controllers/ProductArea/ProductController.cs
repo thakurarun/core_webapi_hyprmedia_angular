@@ -40,28 +40,43 @@ namespace SimpleAPI.Controllers.ProductArea
 
         // POST: api/Product
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Product newProduct)
+        public async Task<IActionResult> Post([FromBody]ProductModel productModel)
         {
-            if (newProduct.Id == Guid.Empty)
+
+            if (ModelState.IsValid)
             {
-                newProduct.Id = Guid.NewGuid();
-                ProductProducer.Products
-                           .Add(newProduct);
+                var newProduct = productModel.ToProduct();
+
+                ProductProducer
+                        .Products
+                        .Add(newProduct);
                 return await Task.Run(() => Ok(true));
             }
+
             return await Task.Run(() => Ok(false));
         }
 
         // PUT: api/Product/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody]Product product)
+        public async Task<IActionResult> Put(Guid id, [FromBody]ProductModel productModel)
         {
-            var result = ProductProducer.Products
+            await Task.Delay(TimeSpan.FromSeconds(2));
+
+            if (ModelState.IsValid)
+            {
+                var result = ProductProducer.Products
                                         .Single(_product => _product.Id == id);
-            result.Name = product.Name;
-            result.Category = product.Category;
-            result.Price = product.Price;
-            return await Task.Run(() => Ok(true));
+                result.Name = productModel.Name;
+                result.Category = productModel.Category;
+                result.Price = productModel.Price;
+                return await Task.Run(() => Ok(true));
+            }
+            //var errorMessages = ModelState.SelectMany(err =>
+            //                        err.Value?
+            //                            .Errors?
+            //                            .Select(e => e.ErrorMessage));
+
+            return await Task.Run(() => Ok(false));
         }
 
         // DELETE: api/ApiWithActions/5

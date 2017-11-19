@@ -27,6 +27,17 @@ namespace SimpleAPI.Controllers.ProductArea.ProductModels
         [Range(0.01, 200)]
         public decimal Price { get; set; }
 
+        public Product ToProduct()
+        {
+            return new Product
+            {
+                Id = Guid.NewGuid(),
+                Name = this.Name,
+                Category = this.Category,
+                Price = this.Price
+            };
+        }
+
     }
 
     public static class ProductProducer

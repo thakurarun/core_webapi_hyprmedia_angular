@@ -1,25 +1,47 @@
 <div *ngIf="product">
-    <form action="" method="POST" role="form">
+    <form [formGroup]="editProductForm" role="form">
         <legend>
             {{editMode ? 'Edit product' : 'Add product'}}
         </legend>
-
+        <hr>
         <div class="form-group">
             <label for="">Name</label>
-            <input type="text" maxlength="20" class="form-control" name="name" [(ngModel)]="product.data.name">
+            <input type="text" class="form-control" formControlName="name">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                <div *ngIf="name.errors.required">
+                    Name can't be empty
+                </div>
+                <div *ngIf="name.errors.minlength">
+                    Minimum 3 characters are required
+                </div>
+                <div *ngIf="name.errors.maxlength">
+                    Maximum 20 characters are allowed
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="">Category</label>
             <!-- <input type="text" class="form-control" name="category" [(ngModel)]="product.data.category"> -->
-            <select name="category" [(ngModel)]="product.data.category" class="form-control">
+            <select name="category" formControlName="category" class="form-control">
                 <option *ngFor="let item of categories" [value]="item">{{item}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="">Price</label>
-            <input type="number" class="form-control" name="price" [(ngModel)]="product.data.price">
+            <input type="number" class="form-control" formControlName="price">
+            <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
+                <div *ngIf="price.errors.required">
+                    Price can't be empty
+                </div>
+                <div *ngIf="price.errors.min">
+                    Minimum amount in 0.01
+                </div>
+                <div *ngIf="price.errors.max">
+                    Maximum amount is 200
+                </div>
+            </div>
         </div>
-        <button type="button" class="btn btn-default" (click)="saveChanges()">
+        <button type="button" class="btn btn-default" (click)="saveChanges()" [disabled]="!editProductForm.valid">
             {{editMode ? 'Update' : 'Add'}}
         </button>
         <button type="button" class="btn btn-danger" (click)="cancelEdit()">Cancel</button>
