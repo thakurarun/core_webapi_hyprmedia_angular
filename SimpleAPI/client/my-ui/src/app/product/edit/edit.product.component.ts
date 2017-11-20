@@ -12,14 +12,11 @@ import { ViewFlags } from '@angular/core/src/view';
 
 export class EditProductComponent implements OnInit {
 
-    @Input()
-    product: IProductDTO;
+    @Input() product: IProductDTO;
 
-    @Output()
-    onCancel: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+    @Output() onCancel: EventEmitter<boolean> = new EventEmitter();
 
-    @Output()
-    onSuccessSave: EventEmitter<boolean> = new EventEmitter();
+    @Output() onSuccessSave: EventEmitter<boolean> = new EventEmitter();
 
     editProductForm: FormGroup;
     editMode = false;

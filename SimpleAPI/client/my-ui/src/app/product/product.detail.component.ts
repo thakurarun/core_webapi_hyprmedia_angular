@@ -12,6 +12,7 @@ export class ProductDetailComponent {
     @ViewChild(ProductListComponent) child: ProductListComponent;
 
     onProductSelection(selectedProduct: IProductDTO) {
+        console.log(323232);
         this.editMode = true;
         this.selectedProduct = selectedProduct;
     }
