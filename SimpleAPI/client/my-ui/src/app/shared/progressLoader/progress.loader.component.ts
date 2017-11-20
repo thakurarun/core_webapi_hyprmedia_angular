@@ -1,7 +1,5 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProgressLayoutSharedService } from './progress.shared.service';
-import { log } from 'util';
-
 // enum STATUS { DISPLAY = 'display', NONE = 'none' }
 
 @Component({
@@ -12,7 +10,7 @@ import { log } from 'util';
     ]
 })
 
-export class ProgressLoaderComponent implements OnInit, OnChanges {
+export class ProgressLoaderComponent implements OnInit {
     currentStatus = 'none';
     constructor(private progressLayoutSharedService: ProgressLayoutSharedService) {
     }
@@ -28,10 +26,4 @@ export class ProgressLoaderComponent implements OnInit, OnChanges {
             };
         }, 1);
     }
-
-    ngOnChanges(changes: any): void {
-
-    }
-
-
 }

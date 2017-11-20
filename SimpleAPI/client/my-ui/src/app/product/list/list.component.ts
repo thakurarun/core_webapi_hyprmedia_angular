@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
 import { ProductService } from '../product.service';
-import { IProductList, IProductDTO } from '../productModel';
+import { IProductList, IProductDTO } from '../product.model';
 
 @Component({
     selector: 'app-product-list',
-    templateUrl: 'prodcut.list.html'
+    templateUrl: 'list.html'
 })
 
 export class ProductListComponent implements OnInit {

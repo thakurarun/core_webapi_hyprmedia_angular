@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductService } from './../product.service';
-import { IProductDTO } from './../productModel';
+import { IProductDTO } from './../product.model';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProductDetailComponent } from '../product.detail.component';
+import { ProductDetailComponent } from '../detail.component';
 import { ViewFlags } from '@angular/core/src/view';
 
 @Component({
     selector: 'app-edit-product',
-    templateUrl: 'edit.product.html'
+    templateUrl: 'edit.html'
 })
 
 export class EditProductComponent implements OnInit {

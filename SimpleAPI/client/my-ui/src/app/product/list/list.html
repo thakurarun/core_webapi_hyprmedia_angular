@@ -3,7 +3,7 @@
         <h3>Availaible products</h3>
     </div>
     <div class="col-4">
-        <button class="btn btn-sm btn-primary" (click)="createNewProduct()">Add</button>
+        <button class="btn btn-sm btn-success" (click)="createNewProduct()">Add</button>
     </div>
 </div>
 <div class="clearfix"></div>
@@ -32,7 +32,7 @@
                             <button [disabled]="editMode" class="btn btn-sm btn-primary" (click)="onEdit(item)">Edit</button>
                         </span>
                         <span>
-                            <button [disabled]="editMode" class="btn btn-sm btn-primary" (click)="onDelete(item)">Delete</button>
+                            <button [disabled]="editMode" class="btn btn-sm btn-danger" (click)="onDelete(item)">Delete</button>
                         </span>
                     </td>
                 </tr>

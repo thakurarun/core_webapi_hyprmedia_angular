@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MyDetailComponent } from './myAccount/detail.component';
 import { UserAccountListComponent } from './userAccounts/user.account.list';
-import { ProductDetailComponent } from './product/product.detail.component';
+import { ProductDetailComponent } from './product/detail.component';
 
 const routes: Routes = [
     { path: 'myaccount', component: MyDetailComponent },
@@ -16,10 +16,10 @@ const routes: Routes = [
     },
 ];
 
+
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
 })
 export class RoutingModule { }
 
-export const routedComponents = [MyDetailComponent];

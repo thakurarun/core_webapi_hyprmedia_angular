@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { catchError, finalize, map } from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
-import { ProgressLayoutSharedService } from './progress.bar/progress.shared.service';
+import { ProgressLayoutSharedService } from './progressLoader/progress.shared.service';
 
 @Injectable()
 export class AppHttpClientInterceptor implements HttpInterceptor {

@@ -6,12 +6,12 @@ import { AppComponent } from './app.component';
 
 /* Feature Modules */
 import { AppSharedModule } from './shared/shared.module';
-import { MyAccountModule } from './myAccount/myAccountModule';
 import { UserAccountsModule } from './userAccounts/user.account.module';
 import { ProductModule } from './product/product.module';
 
 /* Routing Module */
 import { RoutingModule } from './app.route.module';
+import { MyAccountModule } from './myAccount/myaccount.module';
 
 @NgModule({
   declarations: [

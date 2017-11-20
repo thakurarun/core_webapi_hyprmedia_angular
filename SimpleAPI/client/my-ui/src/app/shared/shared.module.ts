@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { ProgressLoaderComponent } from './progress.bar/progress.loader.component';
 import { CommonModule } from '@angular/common';
-import { ProgressLayoutSharedService } from './progress.bar/progress.shared.service';
 import { AppHttpClientInterceptor } from './AppHttpClientInterceptor';
 import { CustomUpperCasePipe } from './utility/UpperCase';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProgressLayoutSharedService } from './progressLoader/progress.shared.service';
+import { ProgressLoaderComponent } from './progressLoader/progress.loader.component';
 
 
 @NgModule({

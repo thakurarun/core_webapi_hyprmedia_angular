@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { IProductDTO } from './productModel';
-import { ProductListComponent } from './list/product.list.component';
+import { IProductDTO } from './product.model';
+import { ProductListComponent } from './list/list.component';
 
 @Component({
     selector: 'app-product-detail',
-    templateUrl: 'product.detail.html'
+    templateUrl: 'detail.html'
 })
 export class ProductDetailComponent {
     selectedProduct: IProductDTO;
@@ -12,7 +12,6 @@ export class ProductDetailComponent {
     @ViewChild(ProductListComponent) child: ProductListComponent;
 
     onProductSelection(selectedProduct: IProductDTO) {
-        console.log(323232);
         this.editMode = true;
         this.selectedProduct = selectedProduct;
     }
