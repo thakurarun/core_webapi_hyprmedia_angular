@@ -13,19 +13,19 @@ export class ProductService {
 
     getAll(): Observable<IProductList> {
         return this.http
-            .get<IProductList>('http://localhost:56441/api/Product');
+            .get<IProductList>('api/product');
     }
 
     saveProduct(product: IProductDTO): Observable<boolean> {
         const addLink = product.links.find(link => link.rel === 'add');
         if (addLink) {
             return this.http
-                .post<boolean>('http://localhost:56441/' + addLink.href, product.data);
+                .post<boolean>(addLink.href, product.data);
         }
         const saveLink = product.links.find(link => link.rel === 'edit');
         if (saveLink) {
             return this.http
-                .put<boolean>('http://localhost:56441/' + saveLink.href, product.data);
+                .put<boolean>( saveLink.href, product.data);
         }
         return Observable.of(false);
     }
@@ -34,7 +34,7 @@ export class ProductService {
         const deleteLink = product.links.find(link => link.rel === 'delete');
         if (deleteLink && confirm('delete this product?')) {
             return this.http
-                .delete<boolean>('http://localhost:56441/' + deleteLink.href);
+                .delete<boolean>(deleteLink.href);
         }
         return Observable.of(false);
     }

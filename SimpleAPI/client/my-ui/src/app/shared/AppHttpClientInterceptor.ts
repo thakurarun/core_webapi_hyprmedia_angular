@@ -10,6 +10,8 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { catchError, finalize, map } from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
 import { ProgressLayoutSharedService } from './progressLoader/progress.shared.service';
+import * as _ from 'lodash';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AppHttpClientInterceptor implements HttpInterceptor {
@@ -22,11 +24,15 @@ export class AppHttpClientInterceptor implements HttpInterceptor {
     public constructor(private progressLayoutSharedService: ProgressLayoutSharedService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const url: string = 'http://localhost:4545/';
         if (this.progressLayoutSharedService.onStart) {
             this._requested++;
             this.progressLayoutSharedService.onStart();
         }
-        // TODO: put custom  request headers...
+        // TODO: put custom  request headers..        
+        request = request.clone({
+            url: url + request.url
+        });
         return next.handle(request)
             .pipe(
             map(event => {
